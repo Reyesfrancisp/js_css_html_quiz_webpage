@@ -1,0 +1,62 @@
+Module 4: Reference notes
+
+
+
+Acceptance Criteria:
+GIVEN I am taking a code quiz
+
+
+WHEN I click the start button
+THEN a timer starts and I am presented with a question
+
+generate a start button, that starts the quiz process
+
+WHEN I answer a question
+THEN I am presented with another question
+
+have a function that displays questions based on the classes
+
+
+WHEN I answer a question incorrectly
+THEN time is subtracted from the clock
+
+after pulling information from the user clicking an answer
+then increase the amount of correct answers if its correct
+subtract time if its wrong
+
+WHEN all questions are answered or the timer reaches 0
+THEN the game is over
+
+have a state after the game is over that displays the result
+
+
+WHEN the game is over
+THEN I can save my initials and score
+
+have a state during the game is over portion and it will save info into a text?
+file that can get parsed to display high scores on a separate page
+
+
+Thoughts: Have a object that will have organized values for stored values
+Name:
+Score:
+Time:
+
+Separate functions to control each aspect:
+
+a section that does the clock
+a section that does the quiz answers if they're correct or not
+a section that displays high scores
+a section that makes the quiz random based off of a pool of questions
+
+special object for the questions:
+
+question itself:
+answer 1:
+answer 2:
+answer 3:
+answer 4:
+correct answer number:
+
+based off of the click that the user does, get the answer value 1/2/3/4 then check it
+against the correct answer number that question has to see if its correct
