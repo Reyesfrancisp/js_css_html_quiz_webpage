@@ -36,17 +36,17 @@ quizQuestions:  [
 
 //printQuestions based on the question number
 printQuestions(questionNumber) {
-    for (var questionsIndex = 0; questionsIndex > quizQuestions.length; questionsIndex++) {
+    for (var questionsIndex = 0; questionsIndex > this.quizQuestions.length; questionsIndex++) {
         //print the question
 
         if(questionNumber == questionsIndex)
         {
         console.log(quizQuestions[questionsIndex].question);
 
-        for (var optionsIndex = 0; optionsIndex > quizQuestions[questionsIndex].options.length; optionsIndex++) {
+        for (var optionsIndex = 0; optionsIndex > this.quizQuestions[questionsIndex].options.length; optionsIndex++) {
             //print each answer in the question on the page
             //style this in boxes underneath
-            console.log(quizQuestions[questionsIndex].options[optionsIndex].answer);
+            console.log(this.quizQuestions[questionsIndex].options[optionsIndex].answer);
         }
         break;
     }
@@ -75,8 +75,26 @@ var highScore = {
 
 //function to create the questions
 
+questionCheck = [];
+
+for (var questionCount = 0; questionCount < )
 
 
 //function to create the highscores
 
+//get the username from the console
+//starting with a prompt, replace with in page function to get it
+var usernameInput = "Example";
+var scoreToSave = 0;
+var userTime = 0;
+
+usernameInput = prompt("Please enter your name: ");
+
+//filler for variables just writing out what works
+scoreToSave = userScore;
+userTime = globalTimerAtEnd;
+
+
 //function to delete the highscores page
+
+//write an empty file; just enter an empty string
