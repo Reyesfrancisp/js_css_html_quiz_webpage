@@ -56,7 +56,9 @@ answer 1:
 answer 2:
 answer 3:
 answer 4:
-correct answer number:
+
+make answers its own array with a boolean at the end if its true or false
+attach it to the question so you can randomize the answers and still have the 
 
 based off of the click that the user does, get the answer value 1/2/3/4 then check it
 against the correct answer number that question has to see if its correct
