@@ -7,61 +7,61 @@ var quiz = {
     //object quizQuestions as an array of objects
     //each object in the array has a question and option
     //
-    quizQuestions: [
-        { //quiz question information in blue brackets
-            //first question
-            question: "This is the first question",
-
-            options: [{
-                answer: "This is the first answer to the first question",
-                score: true
-            },
-
-            {
-                answer: "This is the second answer to the first question",
-                score: false
-            },
-
-            {
-                answer: "This is the third answer to the first question",
-                score: false
-            },
-
-            {
-                answer: "This is the fourth answer to the first question 4",
-                score: false
-            }
-            ]
-        }
-        ,
+    quizQuestions:
         [
+            { //quiz question information in blue brackets
+                //first question
+                question: "This is the first question",
+
+                options: [
+                    {
+                        answer: "This is the first answer to the first question",
+                        score: true
+                    },
+
+                    {
+                        answer: "This is the second answer to the first question",
+                        score: false
+                    },
+
+                    {
+                        answer: "This is the third answer to the first question",
+                        score: false
+                    },
+
+                    {
+                        answer: "This is the fourth answer to the first question",
+                        score: false
+                    }
+                ]
+            },
+
             { //second question
                 question: "This is the second question",
 
-                options: [{
-                    answer: "Answer 1",
-                    score: false
-                },
+                options: [
+                    {
+                        answer: "This is the first answer to the second question",
+                        score: false
+                    },
 
-                {
-                    answer: "Answer 2",
-                    score: true
-                },
+                    {
+                        answer: "This is the second answer to the second question",
+                        score: true
+                    },
 
-                {
-                    answer: "Answer 3",
-                    score: false
-                },
+                    {
+                        answer: "This is the third answer to the second question",
+                        score: false
+                    },
 
-                {
-                    answer: "Answer 4",
-                    score: false
-                }
+                    {
+                        answer: "This is the fourth answer to the second question",
+                        score: false
+                    }
                 ]
-            }
-        ]
-        ,
-        [
+            },
+
             { //third question
                 question: "This is the third question",
 
@@ -86,9 +86,9 @@ var quiz = {
                 }
                 ]
             }
-        ]
-        ,
-        [
+
+            ,
+
             { //quiz question information in blue
                 question: "This is the fourth question",
 
@@ -113,21 +113,15 @@ var quiz = {
                         score: true
                     }
                 ]
+
             }
-        ]
-
-
-
-    ]
-
+        ],
 
     //how would I read this info from a file?
     //get the total amount of questions at the top?
     //read line by line as a string, if there's a linebreak start the input for the style of a question
     //the start is a question, followed by the answers, the answers are grouped in pairs
     //the first line of the options pair is the answer then the second line is if its true or not
-
-
 
     // quizQuestions[0].question access the question
 
@@ -141,46 +135,10 @@ var quiz = {
 
     // how would I randomize the questions? The answers in the questions? Make the quiz different each time.
 
-    ,
-
     //printQuestions based on the question number to the file
 
     //work in progress
 
-    printQuestions(questionNumber) {
-        for (var questionsIndex = 0; questionsIndex > this.quizQuestions.length; questionsIndex++) {
-            //print the question
-
-            if (questionNumber == questionsIndex) {
-                console.log(this.quizQuestions[questionsIndex].question);
-
-                var questionSection = document.createElelement("section");
-                var h2TitleQuestion = document.createElement("h2");
-
-                h2TitleQuestion.innerText = this.quizQuestions[questionsIndex].question;
-
-                questionSection.append(h2TitleQuestion);
-
-
-                for (var optionsIndex = 0; optionsIndex > this.quizQuestions[questionsIndex].options.length; optionsIndex++) {
-                    //print each answer in the question on the page
-                    //style this in boxes underneath
-                    console.log(quiz.quizQuestions[questionsIndex].options[optionsIndex].answer);
-
-
-                }
-
-
-
-                break;
-            }
-
-        }
-
-        return this.quizQuestions[questionNumber];
-    }
-
-    ,
     //function to create the questions
     randomQuizQuestionGenerator() {
         var questionCheck = [];
@@ -192,7 +150,8 @@ var quiz = {
 
             if (questionCheck.includes(randomIndex) == false) {
                 //add the random question if it hasn't already been added to the random array
-                randomQuestionArray.push(quiz.printQuestions(randomIndex));
+                console.log(this.quizQuestions[randomIndex]);
+                randomQuestionArray.push(this.quizQuestions[randomIndex]);
                 questionCheck.push(randomIndex);
             }
             else {
@@ -203,53 +162,130 @@ var quiz = {
         return randomQuestionArray;
     }
 
-
 }
-
-
 //end of quiz object
 
+var maxQuestions = 10; //set a global variable for max quiz questions
+var questionsIndex = 0;
+var randomQuizOutput;
+var score = 0;
+//quiz buttons
+var answerButton1 = document.getElementById("answer1");
+var answerButton2 = document.getElementById("answer2");
+var answerButton3 = document.getElementById("answer3");
+var answerButton4 = document.getElementById("answer4");
+var h2TitleQuestion = document.getElementById("questionTitle");
+
+var generateQuizButton = document.getElementById("quizButton");
+
+//event listeners
+
+generateQuizButton.addEventListener("click", function () {
+    questionsIndex = 0;
+    quizStart(maxQuestions);
+    //hide the generate quiz button
+})
+
+answerButton1.addEventListener("click", function ()
+{
+    
+    if ( randomQuizOutput[questionsIndex].options[0].score == true)
+    {
+        score++;
+    }
+
+    questionsIndex++;
+
+    if (questionsIndex == randomQuizOutput.length)
+    {
+        endQuiz(); //end the quiz
+    }
+    else
+    {
+    questionDisplay();
+    }
+})
+
+answerButton2.addEventListener("click", function ()
+{
+    
+    if ( randomQuizOutput[questionsIndex].options[1].score == true)
+    {
+        score++;
+    }
+
+    questionsIndex++;
+
+    if (questionsIndex == randomQuizOutput.length)
+    {
+        endQuiz(); //end the quiz
+    }
+    else
+    {
+    questionDisplay();
+    }
+})
+
+answerButton3.addEventListener("click", function ()
+{
+    
+    if ( randomQuizOutput[questionsIndex].options[2].score == true)
+    {
+        score++;
+    }
+
+    questionsIndex++;
+
+    if (questionsIndex == randomQuizOutput.length)
+    {
+        endQuiz(); //end the quiz
+    }
+    else
+    {
+    questionDisplay();
+    }
+})
+
+answerButton4.addEventListener("click", function ()
+{
+    
+    if ( randomQuizOutput[questionsIndex].options[3].score == true)
+    {
+        score++;
+    }
+
+    questionsIndex++;
+
+    if (questionsIndex == randomQuizOutput.length)
+    {
+        endQuiz(); //end the quiz
+    }
+    else
+    {
+    questionDisplay();
+    }
+})
 
 
 //function to wait for a click on the 4 answer elements
 //get the element contained in that answer
 //if the answer has a bool of true, increment the score
-function userInputQuiz() {
-    var answerButton1 = document.getElementById(answer1);
 
-    var answerButton2 = document.getElementById(answer2);
+function questionDisplay()
+{
+    console.log("Question display section: question is: ", randomQuizOutput[questionsIndex].question);
+h2TitleQuestion.innerText = randomQuizOutput[questionsIndex].question;
 
-    var answerButton3 = document.getElementById(answer3);
-
-    var answerButton4 = document.getElementById(answer4);
-
-    //quiz button
-
-    var generateQuizButton = document.getElementById(quizButton);
-
-
-    generateQuizButton.addEventListener("click", quizStart());
-
-
-
+answerButton1.innerText = randomQuizOutput[questionsIndex].options[0].answer;
+answerButton2.innerText = randomQuizOutput[questionsIndex].options[1].answer;
+answerButton3.innerText = randomQuizOutput[questionsIndex].options[2].answer;
+answerButton4.innerText = randomQuizOutput[questionsIndex].options[3].answer;
 
 }
 
 // high score section
 
 // how would I overwrite things in a text file? How would I organize it to make it appear top to bottom? food for thought
-var highScore = {
-
-    name: "Insert Name Here", //name of user
-    score: 0, // increment the score
-    time: 0 // log the time of the user
-}
-
-//how would I log the time that is running real time? Lookup how to save that to the highscore
-//timer for quiz function 
-function quizTimer() {
-    //timer here
-}
 
 //function to create the highscores
 
@@ -262,6 +298,7 @@ function highScoreInfo(userScore, globalTimerAtEnd) {
     var scoreToSave = 0;
     var userTime = 0;
 
+    //get user name from form in screen
     usernameInput = prompt("Please enter your name: ");
 
     //filler for variables just writing out what works
@@ -277,17 +314,61 @@ function highScoreInfo(userScore, globalTimerAtEnd) {
 
 //starting quiz
 
-function quizStart() {
-
+function quizStart(maxLength) {
     //start timer
     quizTimer();
 
 
     //generate random quiz questions
-    quiz.randomQuizQuestionGenerator();
+    randomQuizOutput = quiz.randomQuizQuestionGenerator();
+    console.log("This is the random quiz output :", randomQuizOutput);
+
+    for (var testloop = 0; (testloop < randomQuizOutput.length) && testloop < maxLength; testloop++) {
+        console.log(randomQuizOutput[testloop].question);
+
+        for (var innertestloop = 0; innertestloop < 4; innertestloop++) {
+            console.log(randomQuizOutput[testloop].options[innertestloop].answer);
+            console.log(randomQuizOutput[testloop].options[innertestloop].score);
+        }
+    }
+
+    //display the quiz based off of the array passed by the generator
+    questionDisplay();
+}
+
+function endQuiz()
+{
+ //record the results
+ highScoreInfo(score, timer);
+ //hide the questions and answers
 
 
-    //record the results
+}
 
-    
+//function for making timer
+
+var timer = 60; //use this for the time
+var flagTimer = false;
+var quizTime;
+
+function quizTimer() {
+    //starts timer
+    quizTime = setInterval(function () {
+        timer--;
+
+        //display timer in page
+
+        if (timer <= 0) //state where timer is at 0 or less than it
+        {
+            console.log("Ran out of time.");
+            timer = 0;
+            clearInterval(quizTime); //stops the timer
+            flagTimer = true;
+
+          endQuiz();
+
+        }
+
+    }, 1000);
+
 }
