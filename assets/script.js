@@ -168,7 +168,10 @@ var quiz = {
 var maxQuestions = 10; //set a global variable for max quiz questions
 var questionsIndex = 0;
 var randomQuizOutput;
-var score = 0;
+var score;
+//use this for the time
+var timer; 
+var quizTime;
 //quiz buttons
 var answerButton1 = document.getElementById("answer1");
 var answerButton2 = document.getElementById("answer2");
@@ -178,6 +181,12 @@ var h2TitleQuestion = document.getElementById("questionTitle");
 
 var generateQuizButton = document.getElementById("quizButton");
 
+var generateHighScore = document.getElementById("highscore");
+
+//score and timer
+var scoreSection = document.getElementById("score");
+var timerSection = document.getElementById("timer");
+
 //event listeners
 
 generateQuizButton.addEventListener("click", function () {
@@ -186,83 +195,77 @@ generateQuizButton.addEventListener("click", function () {
     //hide the generate quiz button
 })
 
-answerButton1.addEventListener("click", function ()
-{
-    
-    if ( randomQuizOutput[questionsIndex].options[0].score == true)
-    {
+answerButton1.addEventListener("click", function () {
+
+    if (randomQuizOutput[questionsIndex].options[0].score == true) {
         score++;
     }
-
+    else {
+        timer = timer - 5;
+    }
     questionsIndex++;
 
-    if (questionsIndex == randomQuizOutput.length)
-    {
+    if (questionsIndex == randomQuizOutput.length) {
         endQuiz(); //end the quiz
     }
-    else
-    {
-    questionDisplay();
+    else {
+        questionDisplay();
     }
 })
 
-answerButton2.addEventListener("click", function ()
-{
-    
-    if ( randomQuizOutput[questionsIndex].options[1].score == true)
-    {
+answerButton2.addEventListener("click", function () {
+
+    if (randomQuizOutput[questionsIndex].options[1].score == true) {
         score++;
     }
-
+    else {
+        timer = timer - 5;
+    }
     questionsIndex++;
 
-    if (questionsIndex == randomQuizOutput.length)
-    {
+    if (questionsIndex == randomQuizOutput.length) {
         endQuiz(); //end the quiz
     }
-    else
-    {
-    questionDisplay();
+    else {
+        questionDisplay();
     }
 })
 
-answerButton3.addEventListener("click", function ()
-{
-    
-    if ( randomQuizOutput[questionsIndex].options[2].score == true)
-    {
+answerButton3.addEventListener("click", function () {
+
+    if (randomQuizOutput[questionsIndex].options[2].score == true) {
         score++;
+    }
+    else {
+        timer = timer - 5;
     }
 
     questionsIndex++;
 
-    if (questionsIndex == randomQuizOutput.length)
-    {
+    if (questionsIndex == randomQuizOutput.length) {
         endQuiz(); //end the quiz
     }
-    else
-    {
-    questionDisplay();
+    else {
+        questionDisplay();
     }
 })
 
-answerButton4.addEventListener("click", function ()
-{
-    
-    if ( randomQuizOutput[questionsIndex].options[3].score == true)
-    {
+answerButton4.addEventListener("click", function () {
+
+    if (randomQuizOutput[questionsIndex].options[3].score == true) {
         score++;
+    }
+    else {
+        timer = timer - 5;
     }
 
     questionsIndex++;
 
-    if (questionsIndex == randomQuizOutput.length)
-    {
+    if (questionsIndex == randomQuizOutput.length) {
         endQuiz(); //end the quiz
     }
-    else
-    {
-    questionDisplay();
+    else {
+        questionDisplay();
     }
 })
 
@@ -271,16 +274,14 @@ answerButton4.addEventListener("click", function ()
 //get the element contained in that answer
 //if the answer has a bool of true, increment the score
 
-function questionDisplay()
-{
+function questionDisplay() {
     console.log("Question display section: question is: ", randomQuizOutput[questionsIndex].question);
-h2TitleQuestion.innerText = randomQuizOutput[questionsIndex].question;
+    h2TitleQuestion.innerText = randomQuizOutput[questionsIndex].question;
 
-answerButton1.innerText = randomQuizOutput[questionsIndex].options[0].answer;
-answerButton2.innerText = randomQuizOutput[questionsIndex].options[1].answer;
-answerButton3.innerText = randomQuizOutput[questionsIndex].options[2].answer;
-answerButton4.innerText = randomQuizOutput[questionsIndex].options[3].answer;
-
+    answerButton1.innerText = randomQuizOutput[questionsIndex].options[0].answer;
+    answerButton2.innerText = randomQuizOutput[questionsIndex].options[1].answer;
+    answerButton3.innerText = randomQuizOutput[questionsIndex].options[2].answer;
+    answerButton4.innerText = randomQuizOutput[questionsIndex].options[3].answer;
 }
 
 // high score section
@@ -295,29 +296,40 @@ answerButton4.innerText = randomQuizOutput[questionsIndex].options[3].answer;
 function highScoreInfo(userScore, globalTimerAtEnd) {
 
     var usernameInput = "Example";
-    var scoreToSave = 0;
-    var userTime = 0;
+
 
     //get user name from form in screen
     usernameInput = prompt("Please enter your name: ");
 
     //filler for variables just writing out what works
-    scoreToSave = userScore;
-    userTime = globalTimerAtEnd;
+ 
+    var userHighScore =
+    {
+        name: "Example Name",
+        score: 0,
+        timeLeft: 0
+    }
+
+    userHighScore.name = usernameInput;
+    userHighScore.score = userScore;
+    userHighScore.timeLeft = globalTimerAtEnd;
 
 
+    generateHighScore.innerText = "Name: " + userHighScore.name + " Score: " + userHighScore.score + " Time Left: " + userHighScore.timeLeft;
+
+    return userHighScore;
 }
 
 //function to delete the highscores page
-
 //write an empty file; just enter an empty string
-
 //starting quiz
 
 function quizStart(maxLength) {
+
+    score = 0;
+    timer = 60;
     //start timer
     quizTimer();
-
 
     //generate random quiz questions
     randomQuizOutput = quiz.randomQuizQuestionGenerator();
@@ -336,39 +348,40 @@ function quizStart(maxLength) {
     questionDisplay();
 }
 
-function endQuiz()
-{
- //record the results
- highScoreInfo(score, timer);
- //hide the questions and answers
-
-
+function endQuiz() {
+    var finalInfo;
+    clearInterval(quizTime); //stops the timer
+    scoreSection.innerText = "Score: " + score;
+    timerSection.innerText = "Time Left: " + timer;
+    //record the results
+    finalInfo = highScoreInfo(score, timer);
+        finalInfo.name;
+    finalInfo.score;
+    finalInfo.timeLeft;
+    //hide the questions and answers
 }
-
 //function for making timer
-
-var timer = 60; //use this for the time
-var flagTimer = false;
-var quizTime;
 
 function quizTimer() {
     //starts timer
     quizTime = setInterval(function () {
-        timer--;
+
 
         //display timer in page
-
         if (timer <= 0) //state where timer is at 0 or less than it
         {
-            console.log("Ran out of time.");
             timer = 0;
-            clearInterval(quizTime); //stops the timer
-            flagTimer = true;
-
-          endQuiz();
-
+            scoreSection.innerText = "Score: " + score;
+            timerSection.innerText = "Time Left: " + timer;
+            console.log("Ran out of time.");
+            endQuiz(); //ends the quiz
+            clearInterval(quizTime);
         }
-
+        else
+        {
+            scoreSection.innerText = "Score: " + score;
+            timerSection.innerText = "Time Left: " + timer;
+        timer--;
+        }
     }, 1000);
-
 }
