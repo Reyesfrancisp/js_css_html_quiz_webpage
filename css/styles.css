@@ -1,4 +1,4 @@
-:root{
+:root {
     --shade-1: #92afd7;
     --shade-2: #c5d1eb;
     --shade-3: #5a7684;
@@ -8,15 +8,15 @@
 }
 
 
-*
-{
+* {
     font-family: Arial, Helvetica, sans-serif;
 }
+
 body {
     background-color: var(--shade-1);
 }
-header
-{
+
+header {
     background-color: var(--shade-2);
     display: flex;
     align-items: center;
@@ -25,30 +25,27 @@ header
     margin-bottom: 25px;
 }
 
-#displayInfo
-{
+#displayInfo {
     display: flex;
     font-size: 20px;
 }
 
-#score{
+#score {
     margin-right: 10px;
 }
 
-.displayArea
-{
+.displayArea {
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
 }
 
-.hide
-{
+.hide {
     display: none !important;
 }
 
-.displayArea{
+.displayArea {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,19 +61,18 @@ header
 }
 
 
-.answers button{
-margin: 8px;
-padding: 5px;
-width: 70%;
-background-color: var(--shade-3);
-border-color: var(--shade-5);
-color: white;
-font-size: 20px;
+.answers button {
+    margin: 8px;
+    padding: 5px;
+    width: 70%;
+    background-color: var(--shade-3);
+    border-color: var(--shade-5);
+    color: white;
+    font-size: 20px;
 }
 
 
-#questionTitle
-{
+#questionTitle {
     color: white;
     background-color: var(--shade-4);
     width: 80%;
@@ -84,8 +80,7 @@ font-size: 20px;
     border-color: var(--shade-5);
 }
 
-#quizButton
-{
+#quizButton {
     padding: 10px 20px;
     font-size: 16px;
     margin: 10px;
@@ -101,15 +96,14 @@ font-size: 20px;
 
 #quizButton:hover {
     background-color: #45a049;
-  }
+}
 
-  #quizButton:active {
+#quizButton:active {
     background-color: #3e8e41;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  }
+}
 
-#deleteHighScores
-{
+#deleteHighScores {
     padding: 10px 20px;
     font-size: 16px;
     margin: 10px;
@@ -123,33 +117,29 @@ font-size: 20px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-#deleteHighScores:active
-{
-    background-color: #8B0000    ;
+#deleteHighScores:active {
+    background-color: #8B0000;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 
-#highScore
-{
+#highScore {
     margin: 10px;
     padding: 10px 5%;
     background-color: var(--shade-2);
     border-color: var(--shade-5);
 }
 
-#userForm label
-{
+#userForm label {
     font-weight: bold;
     margin-right: 10px;
 }
 
-hr{
-    width:50%;
+hr {
+    width: 50%;
 }
 
-#correctSection
-{
+#correctSection {
     margin: 0;
     font-style: italic;
     font-size: 24px;
