@@ -14,23 +14,25 @@
     <header>
 
         <h2 class="pageTitle">JS, CSS, HTML Coding Quiz | By Francis Reyes</h2>
-        <h3 id="score">Correct: </h3>
-        <h3 id="timer">Timer: </h3>
+        <section id="displayInfo">
+            <h3 id="score">Correct: </h3>
+            <h3 id="timer">Timer: </h3>
+        </section>
     </header>
 
     <main class="displayArea">
 
-        <section class="questionsAndAnswers">
+        <section id="questionsAndAnswers">
             <h2 id="questionTitle">
-                Example Question?
+                Welcome to the Quiz!
             </h2>
 
-            <section class ="answers">
-                <button id="answer1">
+            <section class="answers">
+                <button id="answer1" data-choice-number="1" data-paul-was-here="true">
                     answer 1
                 </button>
 
-                <button id="answer2">
+                <button id="answer2" data-choice-number="2">
                     answer 2
                 </button>
 
@@ -44,17 +46,25 @@
 
             </section>
 
-            <h3 id="highscore">
-                Highscore example section! Name: Francis Reyes, Score: 10, Time Left: 50
-            </h3>
+
         </section>
+
+        <form id="userForm">
+            <label for="name-input">Enter Your Name: </label>
+
+            <input id="name-input" type="text" placeholder="Enter Your Name">
+            <input type="submit" value="Submit">
+        </form>
+        <h3 id="highScore">
+            Highscore example section! Name: Francis Reyes, Score: 10, Time Left: 50
+        </h3>
 
         <button id="quizButton">
             Generate Quiz
         </button>
     </main>
 
-<script src="assets/script.js"></script>
+    <script src="assets/script.js"></script>
 </body>
 
 </html>

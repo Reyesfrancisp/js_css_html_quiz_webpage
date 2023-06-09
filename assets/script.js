@@ -1,4 +1,3 @@
-
 // making an object of quiz questions that is an array of questions and options. the options is an array of answers and scores that will show. quizQuestions holds a question and an array of answers and scores. the answers print the text of the answer, score will hold if that answer is true or not.
 // by making an array of objects you can add more quiz questions to that array quizQuestions[0] then you can get to each part to display it
 
@@ -6,7 +5,7 @@ var quiz = {
 
     //object quizQuestions as an array of objects
     //each object in the array has a question and option
-    //
+    //options contains an object with an answer and score boolean
     quizQuestions:
         [
             { //quiz question information in blue brackets
@@ -117,35 +116,17 @@ var quiz = {
             }
         ],
 
-    //how would I read this info from a file?
-    //get the total amount of questions at the top?
-    //read line by line as a string, if there's a linebreak start the input for the style of a question
-    //the start is a question, followed by the answers, the answers are grouped in pairs
-    //the first line of the options pair is the answer then the second line is if its true or not
-
     // quizQuestions[0].question access the question
-
     //quizQuestions[0].options[0].answer access the first option
-
     // example of loop
 
-    // think about how this would run in the page, you want to call a function after each selection of an answer then moves it on the next question
-
-    // display if they got the questions correct or not
-
-    // how would I randomize the questions? The answers in the questions? Make the quiz different each time.
-
-    //printQuestions based on the question number to the file
-
-    //work in progress
-
     //function to create the questions
-    randomQuizQuestionGenerator() {
+    randomQuizQuestionGenerator(maxQuestionLength) {
         var questionCheck = [];
         var randomQuestionArray = [];
         //create random questions
         //randomizes the order 
-        for (var questionCount = 0; questionCount < this.quizQuestions.length; questionCount++) {
+        for (var questionCount = 0; questionCount < this.quizQuestions.length && questionCount < maxQuestionLength; questionCount++) {
             var randomIndex = Math.floor(Math.random() * this.quizQuestions.length);
 
             if (questionCheck.includes(randomIndex) == false) {
@@ -165,37 +146,58 @@ var quiz = {
 }
 //end of quiz object
 
+//variables
+
 var maxQuestions = 10; //set a global variable for max quiz questions
 var questionsIndex = 0;
 var randomQuizOutput;
 var score;
 //use this for the time
-var timer; 
+var timer;
 var quizTime;
 //quiz buttons
 var answerButton1 = document.getElementById("answer1");
 var answerButton2 = document.getElementById("answer2");
 var answerButton3 = document.getElementById("answer3");
 var answerButton4 = document.getElementById("answer4");
-var h2TitleQuestion = document.getElementById("questionTitle");
+var quizTitle = document.getElementById("questionTitle");
 
-var generateQuizButton = document.getElementById("quizButton");
-
-var generateHighScore = document.getElementById("highscore");
-
+//sections
+var questionSection = document.querySelector("#questionsAndAnswers");
+var quizButton = document.querySelector("#quizButton");
+var quizDisplayInfo = document.querySelector("#displayInfo");
+var quizUserForm = document.querySelector("#userForm");
+var quizHighScore = document.querySelector("#highScore");
 //score and timer
 var scoreSection = document.getElementById("score");
 var timerSection = document.getElementById("timer");
 
 //event listeners
-
-generateQuizButton.addEventListener("click", function () {
+quizButton.addEventListener("click", function () {
     questionsIndex = 0;
     quizStart(maxQuestions);
     //hide the generate quiz button
 })
 
-answerButton1.addEventListener("click", function () {
+//simplify the code below
+
+//WIP
+
+// var buttons = document.body.querySelector("displayArea");
+
+// for (var buttonCount = 0; buttonCount < randomQuizOutput.length; buttonCount++)
+// {
+//     if (buttons.target.tagName == 
+// }
+
+
+//end of WIP
+
+answerButton1.addEventListener("click", function (event) {
+    // var choiceNumber = event.target.dataset.choiceNumber;
+    // console.log('choiceNumber should be 1:', choiceNumber)
+    // console.log('was paul here?', event.target.dataset.paulWasHere)
+    // console.log('using the id', event.target.id.split('')[event.target.id.split('').length - 1])
 
     if (randomQuizOutput[questionsIndex].options[0].score == true) {
         score++;
@@ -269,15 +271,15 @@ answerButton4.addEventListener("click", function () {
     }
 })
 
-
 //function to wait for a click on the 4 answer elements
 //get the element contained in that answer
 //if the answer has a bool of true, increment the score
 
 function questionDisplay() {
     console.log("Question display section: question is: ", randomQuizOutput[questionsIndex].question);
-    h2TitleQuestion.innerText = randomQuizOutput[questionsIndex].question;
+    quizTitle.innerText = randomQuizOutput[questionsIndex].question;
 
+    //replace with something simpler later on
     answerButton1.innerText = randomQuizOutput[questionsIndex].options[0].answer;
     answerButton2.innerText = randomQuizOutput[questionsIndex].options[1].answer;
     answerButton3.innerText = randomQuizOutput[questionsIndex].options[2].answer;
@@ -285,24 +287,18 @@ function questionDisplay() {
 }
 
 // high score section
-
 // how would I overwrite things in a text file? How would I organize it to make it appear top to bottom? food for thought
-
 //function to create the highscores
-
 //get the username from the console
 //starting with a prompt, replace with in page function to get it
 
-function highScoreInfo(userScore, globalTimerAtEnd) {
-
-    var usernameInput = "Example";
+function highScoreInfo(userScore, globalTimerAtEnd, usernameInput) {
 
 
-    //get user name from form in screen
-    usernameInput = prompt("Please enter your name: ");
+
 
     //filler for variables just writing out what works
- 
+
     var userHighScore =
     {
         name: "Example Name",
@@ -314,8 +310,7 @@ function highScoreInfo(userScore, globalTimerAtEnd) {
     userHighScore.score = userScore;
     userHighScore.timeLeft = globalTimerAtEnd;
 
-
-    generateHighScore.innerText = "Name: " + userHighScore.name + " Score: " + userHighScore.score + " Time Left: " + userHighScore.timeLeft;
+    quizHighScore.innerText = "Name: " + userHighScore.name + " Score: " + userHighScore.score + " Time Left: " + userHighScore.timeLeft;
 
     return userHighScore;
 }
@@ -325,14 +320,16 @@ function highScoreInfo(userScore, globalTimerAtEnd) {
 //starting quiz
 
 function quizStart(maxLength) {
-
     score = 0;
     timer = 60;
     //start timer
     quizTimer();
 
+    hideQuizGen();
+    showQuestions();
+    hideUserForm();
     //generate random quiz questions
-    randomQuizOutput = quiz.randomQuizQuestionGenerator();
+    randomQuizOutput = quiz.randomQuizQuestionGenerator(maxLength);
     console.log("This is the random quiz output :", randomQuizOutput);
 
     for (var testloop = 0; (testloop < randomQuizOutput.length) && testloop < maxLength; testloop++) {
@@ -354,19 +351,123 @@ function endQuiz() {
     scoreSection.innerText = "Score: " + score;
     timerSection.innerText = "Time Left: " + timer;
     //record the results
-    finalInfo = highScoreInfo(score, timer);
-        finalInfo.name;
-    finalInfo.score;
-    finalInfo.timeLeft;
-    //hide the questions and answers
+
+      //hide the questions and answers
+      hideQuestions();
+      showQuizGen();
+        showUserForm();
+
+    //comment below and use the form
+    var userNameEntered = formRead();
+
+    finalInfo = highScoreInfo(score, timer, userNameEntered);
+
+    //local storage
+
+    addItemToLocalStorage("highscores", finalInfo);
+
+  
 }
+
+//hide parts in HTML
+
+function hideQuestions() {
+    questionSection.classList.add("hide");
+}
+
+function hideQuizGen() {
+    quizButton.classList.add("hide");
+}
+
+function hideUserDisplayInfo() {
+    quizDisplayInfo.classList.add("hide");
+}
+
+function hideUserForm()
+{
+    quizUserForm.classList.add("hide");
+}
+
+function hideHighScore()
+{
+    quizHighScore.classList.add("hide");
+}
+
+//show parts in HTML
+function showQuestions()
+{
+questionSection.classList.remove("hide");
+}
+
+function showQuizGen()
+{
+    quizButton.classList.remove("hide");
+}
+
+function showUserDisplayInfo() {
+    quizDisplayInfo.classList.remove("hide");
+}
+
+function showUserForm()
+{
+    quizUserForm.classList.remove("hide");
+}
+
+function showHighScore()
+{
+    quizHighScore.classList.remove("hide");
+}
+
+function showQuestionTitle()
+{
+    quizTitle.classList.remove("hide");
+}
+
+//form
+function formRead() {
+    var userName;
+
+    var userFormName = document.querySelector("#userForm");
+
+    userFormName.addEventListener("submit", function (eventObject) {
+        eventObject.preventDefault();
+
+        userName = document.getElementById("name-input");
+
+    })
+
+    return userName;
+}
+
+function getFromLocalStorage(itemKey) {
+    return JSON.parse(localStorage.getItem(itemKey)) || [];
+}
+
+function setLocalStorage(itemKey, data) {
+    localStorage.setItem(itemKey, JSON.stringify(data))
+}
+
+function addItemToLocalStorage(itemKey, item) {
+    var currData = getFromLocalStorage(itemKey); // this is an array datatype
+    currData.push(item);
+    setLocalStorage(itemKey, currData);
+}
+
+function deleteLocalStorage(itemKey) {
+
+}
+
+//display starting page
+
+//display quiz loop
+
+//display end
+
 //function for making timer
 
 function quizTimer() {
     //starts timer
     quizTime = setInterval(function () {
-
-
         //display timer in page
         if (timer <= 0) //state where timer is at 0 or less than it
         {
@@ -377,11 +478,21 @@ function quizTimer() {
             endQuiz(); //ends the quiz
             clearInterval(quizTime);
         }
-        else
-        {
+        else {
             scoreSection.innerText = "Score: " + score;
             timerSection.innerText = "Time Left: " + timer;
-        timer--;
+            timer--;
         }
     }, 1000);
 }
+
+
+//initialize the page
+
+hideQuestions();
+hideUserForm();
+hideUserDisplayInfo();
+hideHighScore();
+
+showQuestionTitle();
+console.log ("Loaded Page");
