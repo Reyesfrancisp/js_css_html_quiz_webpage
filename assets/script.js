@@ -6,115 +6,235 @@ var quiz = {
     //object quizQuestions as an array of objects
     //each object in the array has a question and option
     //options contains an object with an answer and score boolean
-    quizQuestions:
-        [
-            { //quiz question information in blue brackets
-                //first question
-                question: "This is the first question",
-
-                options: [
-                    {
-                        answer: "This is the first answer to the first question",
-                        score: true
-                    },
-
-                    {
-                        answer: "This is the second answer to the first question",
-                        score: false
-                    },
-
-                    {
-                        answer: "This is the third answer to the first question",
-                        score: false
-                    },
-
-                    {
-                        answer: "This is the fourth answer to the first question",
-                        score: false
-                    }
-                ]
-            },
-
-            { //second question
-                question: "This is the second question",
-
-                options: [
-                    {
-                        answer: "This is the first answer to the second question",
-                        score: false
-                    },
-
-                    {
-                        answer: "This is the second answer to the second question",
-                        score: true
-                    },
-
-                    {
-                        answer: "This is the third answer to the second question",
-                        score: false
-                    },
-
-                    {
-                        answer: "This is the fourth answer to the second question",
-                        score: false
-                    }
-                ]
-            },
-
-            { //third question
-                question: "This is the third question",
-
-                options: [{
-                    answer: "This is the first answer to the third question",
-                    score: false
-                },
-
-                {
-                    answer: "This is the second answer to the third question",
-                    score: false
-                },
-
-                {
-                    answer: "This is the third answer to the third question",
-                    score: true
-                },
-
-                {
-                    answer: "This is the fourth answer to the third question",
-                    score: false
-                }
-                ]
-            }
-
-            ,
-
-            { //quiz question information in blue
-                question: "This is the fourth question",
-
-                options: [
-                    {
-                        answer: "This is the first answer to the fourth question",
-                        score: false
-                    },
-
-                    {
-                        answer: "This is the second answer to the fourth question",
-                        score: false
-                    },
-
-                    {
-                        answer: "This is the third answer to the fourth question",
-                        score: false
-                    },
-
-                    {
-                        answer: "This is the fourth answer to the fourth question",
-                        score: true
-                    }
-                ]
-
-            }
-        ],
+    quizQuestions: [
+        {
+          question: "What does HTML stand for?",
+          options: [
+            { answer: "Hyper Text Markup Language", score: true },
+            { answer: "Home Tool Markup Language", score: false },
+            { answer: "Hyperlinks and Text Markup Language", score: false },
+            { answer: "Hyper Transfer Markup Language", score: false }
+          ]
+        },
+        {
+          question: "What does CSS stand for?",
+          options: [
+            { answer: "Cascading Style Sheets", score: true },
+            { answer: "Creative Style Sheets", score: false },
+            { answer: "Colorful Style Sheets", score: false },
+            { answer: "Computer Style Sheets", score: false }
+          ]
+        },
+        {
+          question: "Which of the following is NOT a JavaScript data type?",
+          options: [
+            { answer: "Boolean", score: false },
+            { answer: "Number", score: false },
+            { answer: "String", score: false },
+            { answer: "Float", score: true }
+          ]
+        },
+        {
+          question: "What is the correct syntax to comment out a single line in CSS?",
+          options: [
+            { answer: "// This is a comment", score: false },
+            { answer: "/* This is a comment /", score: false },
+            { answer: "// This is a comment //", score: false },
+            { answer: "/* This is a comment */", score: true }
+          ]
+        },
+        {
+          question: "What is the purpose of the 'document.getElementById()' method in JavaScript?",
+          options: [
+            { answer: "To select an HTML element by its class name", score: false },
+            { answer: "To select an HTML element by its tag name", score: false },
+            { answer: "To select an HTML element by its ID", score: true },
+            { answer: "To select an HTML element by its value", score: false }
+          ]
+        },
+        {
+          question: "Which HTML tag is used to define an unordered list?",
+          options: [
+            { answer: "<ol>", score: false },
+            { answer: "<ul>", score: true },
+            { answer: "<li>", score: false },
+            { answer: "<dl>", score: false }
+          ]
+        },
+        {
+          question: "What is the purpose of the 'text-align' property in CSS?",
+          options: [
+            { answer: "To set the font size of an element", score: false },
+            { answer: "To control the spacing between lines of text", score: false },
+            { answer: "To specify the alignment of text within an element", score: true },
+            { answer: "To set the color of the text", score: false }
+          ]
+        },
+        {
+          question: "What is the output of the following JavaScript code?\n\nconsole.log(2 + '2');",
+          options: [
+            { answer: "22", score: true },
+            { answer: "4", score: false },
+            { answer: "NaN", score: false },
+            { answer: "TypeError", score: false }
+          ]
+        },
+        {
+          question: "Which CSS property is used to add shadows to elements?",
+          options: [
+            { answer: "text-shadow", score: false },
+            { answer: "box-shadow", score: true },
+            { answer: "shadow", score: false },
+            { answer: "element-shadow", score: false }
+          ]
+        },
+        {
+          question: "What is the purpose of the 'setAttribute()' method in JavaScript?",
+          options: [
+            { answer: "To add a new attribute to an HTML element", score: true },
+            { answer: "To remove an attribute from an HTML element", score: false },
+            { answer: "To retrieve the value of an attribute from an HTML element", score: false },
+            { answer: "To modify the style of an HTML element", score: false }
+          ]
+        },
+        {
+          question: "Which HTML tag is used to define a table row?",
+          options: [
+            { answer: "<td>", score: false },
+            { answer: "<th>", score: false },
+            { answer: "<tr>", score: true },
+            { answer: "<table>", score: false }
+          ]
+        },
+        {
+          question: "Which of the following is NOT a valid CSS length unit?",
+          options: [
+            { answer: "px", score: false },
+            { answer: "em", score: false },
+            { answer: "vh", score: false },
+            { answer: "pt", score: true }
+          ]
+        },
+        {
+          question: "What is the purpose of the 'parseInt()' function in JavaScript?",
+          options: [
+            { answer: "To convert a string to an integer", score: true },
+            { answer: "To round a number to the nearest integer", score: false },
+            { answer: "To check if a value is NaN", score: false },
+            { answer: "To convert a number to a string", score: false }
+          ]
+        },
+        {
+          question: "What is the default value of the 'position' property in CSS?",
+          options: [
+            { answer: "absolute", score: false },
+            { answer: "relative", score: false },
+            { answer: "fixed", score: false },
+            { answer: "static", score: true }
+          ]
+        },
+        {
+          question: "Which JavaScript function is used to add a new item to an array?",
+          options: [
+            { answer: "push()", score: true },
+            { answer: "add()", score: false },
+            { answer: "insert()", score: false },
+            { answer: "append()", score: false }
+          ]
+        },
+        {
+          question: "What is the purpose of the 'display' property in CSS?",
+          options: [
+            { answer: "To set the height and width of an element", score: false },
+            { answer: "To control the positioning of an element", score: false },
+            { answer: "To hide or show an element", score: true },
+            { answer: "To add a background image to an element", score: false }
+          ]
+        },
+        {
+          question: "Which HTML tag is used to define a hyperlink?",
+          options: [
+            { answer: "<a>", score: true },
+            { answer: "<p>", score: false },
+            { answer: "<span>", score: false },
+            { answer: "<div>", score: false }
+          ]
+        },
+        {
+          question: "What is the output of the following JavaScript code?\n\nconsole.log(typeof NaN);",
+          options: [
+            { answer: "number", score: true },
+            { answer: "string", score: false },
+            { answer: "undefined", score: false },
+            { answer: "NaN", score: false }
+          ]
+        },
+        {
+          question: "Which CSS property is used to control the size of a font?",
+          options: [
+            { answer: "text-size", score: false },
+            { answer: "font-size", score: true },
+            { answer: "size", score: false },
+            { answer: "font-style", score: false }
+          ]
+        },
+        {
+          question: "What is the purpose of the 'appendChild()' method in JavaScript?",
+          options: [
+            { answer: "To remove an HTML element from the DOM", score: false },
+            { answer: "To add a new attribute to an HTML element", score: false },
+            { answer: "To insert a new HTML element into another element", score: true },
+            { answer: "To modify the text content of an HTML element", score: false }
+          ]
+        },
+        {
+          question: "Which HTML tag is used to define a form?",
+          options: [
+            { answer: "<form>", score: true },
+            { answer: "<input>", score: false },
+            { answer: "<label>", score: false },
+            { answer: "<button>", score: false }
+          ]
+        },
+        {
+          question: "What is the purpose of the 'background-color' property in CSS?",
+          options: [
+            { answer: "To set the font color of an element", score: false },
+            { answer: "To control the spacing between lines of text", score: false },
+            { answer: "To specify the background color of an element", score: true },
+            { answer: "To set the width and height of an element", score: false }
+          ]
+        },
+        {
+          question: "What is the output of the following JavaScript code?\n\nconsole.log(5 > 3 && 2 < 4);",
+          options: [
+            { answer: "true", score: true },
+            { answer: "false", score: false },
+            { answer: "undefined", score: false },
+            { answer: "TypeError", score: false }
+          ]
+        },
+        {
+          question: "Which CSS property is used to add rounded corners to elements?",
+          options: [
+            { answer: "border-radius", score: true },
+            { answer: "corner-radius", score: false },
+            { answer: "round-corners", score: false },
+            { answer: "border-style", score: false }
+          ]
+        },
+        {
+          question: "What is the purpose of the 'addEventListener()' method in JavaScript?",
+          options: [
+            { answer: "To remove an event handler from an element", score: false },
+            { answer: "To execute a function when an event occurs on an element", score: true },
+            { answer: "To create a new event and attach it to an element", score: false },
+            { answer: "To retrieve information about an event", score: false }
+          ]
+        }
+        // Add more questions here...
+      
+    ],
 
     // quizQuestions[0].question access the question
     //quizQuestions[0].options[0].answer access the first option
@@ -155,7 +275,7 @@ var score;
 var userName = "Example";
 //use this for the time
 var timer;
-var timer2 = 3;
+var timer2 = 2;
 var quizTime;
 var correctShow;
 //quiz buttons
@@ -204,7 +324,7 @@ quizButton.addEventListener("click", function () {
 //end of WIP
 
 answerButton1.addEventListener("click", function (event) {
-
+    clearInterval(correctShow);
     showAnswer();
     if (randomQuizOutput[questionsIndex].options[0].score == true) {
         score++;
@@ -225,6 +345,7 @@ answerButton1.addEventListener("click", function (event) {
 })
 
 answerButton2.addEventListener("click", function () {
+    clearInterval(correctShow);
     showAnswer();
     if (randomQuizOutput[questionsIndex].options[1].score == true) {
         score++;
@@ -245,6 +366,7 @@ answerButton2.addEventListener("click", function () {
 })
 
 answerButton3.addEventListener("click", function () {
+    clearInterval(correctShow);
     showAnswer();
     if (randomQuizOutput[questionsIndex].options[2].score == true) {
         score++;
@@ -266,6 +388,7 @@ answerButton3.addEventListener("click", function () {
 })
 
 answerButton4.addEventListener("click", function () {
+    clearInterval(correctShow);
     showAnswer();
     if (randomQuizOutput[questionsIndex].options[3].score == true) {
         score++;
@@ -329,8 +452,10 @@ function highScoreInfo(userScore, globalTimerAtEnd, usernameInput) {
 
 function quizStart(maxLength) {
     score = 0;
-    timer = 60;
+    timer = 90;
+    timer2 = 2;
     //start timer
+    clearInterval(correctShow);
     quizTimer();
     showUserDisplayInfo();
     hideQuizGen();
@@ -357,7 +482,8 @@ function quizStart(maxLength) {
 }
 
 function endQuiz() {
-    clearInterval(quizTime);
+    clearInterval(quizTime);    
+    clearInterval(correctShow);
     scoreSection.innerText = "Score: " + score;
     timerSection.innerText = "Time Left: " + timer;
     //record the results
@@ -488,14 +614,15 @@ function showAnswer() {
 
     correctShow = setInterval(function () {
         //display timer in page
-        showCorrect();
-        if (timer2 <= 0) //state where timer is at 0 or less than it
+        
+        if (timer2 == 0) //state where timer is at 0 or less than it
         {
             hideCorrect();
-            timer2 = 3;
+            timer2 = 2;
             clearInterval(correctShow);
         }
         else {
+            showCorrect();
             timer2--;
         }
     }, 1000);
@@ -513,7 +640,6 @@ function quizTimer() {
             scoreSection.innerText = "Score: " + score;
             timerSection.innerText = "Time Left: " + timer;
             console.log("Ran out of time.");
-
             endQuiz(); //ends the quiz
 
         }
