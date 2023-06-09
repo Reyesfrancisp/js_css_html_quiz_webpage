@@ -152,25 +152,30 @@ var maxQuestions = 10; //set a global variable for max quiz questions
 var questionsIndex = 0;
 var randomQuizOutput;
 var score;
+var userName = "Example";
 //use this for the time
 var timer;
+var timer2 = 3;
 var quizTime;
+var correctShow;
 //quiz buttons
 var answerButton1 = document.getElementById("answer1");
 var answerButton2 = document.getElementById("answer2");
 var answerButton3 = document.getElementById("answer3");
 var answerButton4 = document.getElementById("answer4");
 var quizTitle = document.getElementById("questionTitle");
-
+var deleteScores = document.getElementById("deleteHighScores");
 //sections
 var questionSection = document.querySelector("#questionsAndAnswers");
 var quizButton = document.querySelector("#quizButton");
 var quizDisplayInfo = document.querySelector("#displayInfo");
 var quizUserForm = document.querySelector("#userForm");
 var quizHighScore = document.querySelector("#highScore");
-//score and timer
+var correctOutput = document.querySelector("#correctSection");
+//score, timer, name
 var scoreSection = document.getElementById("score");
 var timerSection = document.getElementById("timer");
+var userFormName = document.querySelector("#userForm");
 
 //event listeners
 quizButton.addEventListener("click", function () {
@@ -191,24 +196,28 @@ quizButton.addEventListener("click", function () {
 // }
 
 
+// var choiceNumber = event.target.dataset.choiceNumber;
+// console.log('choiceNumber should be 1:', choiceNumber)
+// console.log('was paul here?', event.target.dataset.paulWasHere)
+// console.log('using the id', event.target.id.split('')[event.target.id.split('').length - 1])
+
 //end of WIP
 
 answerButton1.addEventListener("click", function (event) {
-    // var choiceNumber = event.target.dataset.choiceNumber;
-    // console.log('choiceNumber should be 1:', choiceNumber)
-    // console.log('was paul here?', event.target.dataset.paulWasHere)
-    // console.log('using the id', event.target.id.split('')[event.target.id.split('').length - 1])
 
+    showAnswer();
     if (randomQuizOutput[questionsIndex].options[0].score == true) {
         score++;
+        correctOutput.innerText = "Correct!";
     }
     else {
+        correctOutput.innerText = "Wrong";
         timer = timer - 5;
     }
     questionsIndex++;
 
     if (questionsIndex == randomQuizOutput.length) {
-        endQuiz(); //end the quiz
+        endQuiz(); //ends quiz
     }
     else {
         questionDisplay();
@@ -216,17 +225,19 @@ answerButton1.addEventListener("click", function (event) {
 })
 
 answerButton2.addEventListener("click", function () {
-
+    showAnswer();
     if (randomQuizOutput[questionsIndex].options[1].score == true) {
         score++;
+        correctOutput.innerText = "Correct!";
     }
     else {
+        correctOutput.innerText = "Wrong";
         timer = timer - 5;
     }
     questionsIndex++;
 
     if (questionsIndex == randomQuizOutput.length) {
-        endQuiz(); //end the quiz
+        endQuiz(); //ends quiz
     }
     else {
         questionDisplay();
@@ -234,18 +245,20 @@ answerButton2.addEventListener("click", function () {
 })
 
 answerButton3.addEventListener("click", function () {
-
+    showAnswer();
     if (randomQuizOutput[questionsIndex].options[2].score == true) {
         score++;
+        correctOutput.innerText = "Correct!";
     }
     else {
+        correctOutput.innerText = "Wrong";
         timer = timer - 5;
     }
 
     questionsIndex++;
 
     if (questionsIndex == randomQuizOutput.length) {
-        endQuiz(); //end the quiz
+        endQuiz(); //ends quiz
     }
     else {
         questionDisplay();
@@ -253,18 +266,20 @@ answerButton3.addEventListener("click", function () {
 })
 
 answerButton4.addEventListener("click", function () {
-
+    showAnswer();
     if (randomQuizOutput[questionsIndex].options[3].score == true) {
         score++;
+        correctOutput.innerText = "Correct!";
     }
     else {
+        correctOutput.innerText = "Wrong";
         timer = timer - 5;
     }
 
     questionsIndex++;
 
     if (questionsIndex == randomQuizOutput.length) {
-        endQuiz(); //end the quiz
+        endQuiz(); //ends quiz
     }
     else {
         questionDisplay();
@@ -294,11 +309,7 @@ function questionDisplay() {
 
 function highScoreInfo(userScore, globalTimerAtEnd, usernameInput) {
 
-
-
-
     //filler for variables just writing out what works
-
     var userHighScore =
     {
         name: "Example Name",
@@ -310,13 +321,10 @@ function highScoreInfo(userScore, globalTimerAtEnd, usernameInput) {
     userHighScore.score = userScore;
     userHighScore.timeLeft = globalTimerAtEnd;
 
-    quizHighScore.innerText = "Name: " + userHighScore.name + " Score: " + userHighScore.score + " Time Left: " + userHighScore.timeLeft;
+    quizHighScore.innerText = "Name: " + userHighScore.name + "\nCurrent Score: " + userHighScore.score + "\nTime Left: " + userHighScore.timeLeft;
 
     return userHighScore;
 }
-
-//function to delete the highscores page
-//write an empty file; just enter an empty string
 //starting quiz
 
 function quizStart(maxLength) {
@@ -324,10 +332,13 @@ function quizStart(maxLength) {
     timer = 60;
     //start timer
     quizTimer();
-
+    showUserDisplayInfo();
     hideQuizGen();
     showQuestions();
     hideUserForm();
+    hideDeleteButton();
+    hideHighScore();
+    hideCorrect();
     //generate random quiz questions
     randomQuizOutput = quiz.randomQuizQuestionGenerator(maxLength);
     console.log("This is the random quiz output :", randomQuizOutput);
@@ -346,27 +357,14 @@ function quizStart(maxLength) {
 }
 
 function endQuiz() {
-    var finalInfo;
-    clearInterval(quizTime); //stops the timer
+    clearInterval(quizTime);
     scoreSection.innerText = "Score: " + score;
     timerSection.innerText = "Time Left: " + timer;
     //record the results
 
-      //hide the questions and answers
-      hideQuestions();
-      showQuizGen();
-        showUserForm();
-
-    //comment below and use the form
-    var userNameEntered = formRead();
-
-    finalInfo = highScoreInfo(score, timer, userNameEntered);
-
-    //local storage
-
-    addItemToLocalStorage("highscores", finalInfo);
-
-  
+    //hide the questions and answers
+    hideQuestions();
+    showUserForm();
 }
 
 //hide parts in HTML
@@ -383,24 +381,28 @@ function hideUserDisplayInfo() {
     quizDisplayInfo.classList.add("hide");
 }
 
-function hideUserForm()
-{
+function hideUserForm() {
     quizUserForm.classList.add("hide");
 }
 
-function hideHighScore()
-{
+function hideHighScore() {
     quizHighScore.classList.add("hide");
 }
 
-//show parts in HTML
-function showQuestions()
-{
-questionSection.classList.remove("hide");
+function hideDeleteButton() {
+    deleteScores.classList.add("hide");
 }
 
-function showQuizGen()
-{
+function hideCorrect() {
+    correctOutput.classList.add("hide");
+}
+
+//show parts in HTML
+function showQuestions() {
+    questionSection.classList.remove("hide");
+}
+
+function showQuizGen() {
     quizButton.classList.remove("hide");
 }
 
@@ -408,37 +410,59 @@ function showUserDisplayInfo() {
     quizDisplayInfo.classList.remove("hide");
 }
 
-function showUserForm()
-{
+function showUserForm() {
     quizUserForm.classList.remove("hide");
 }
 
-function showHighScore()
-{
+function showHighScore() {
     quizHighScore.classList.remove("hide");
 }
 
-function showQuestionTitle()
-{
+function showQuestionTitle() {
     quizTitle.classList.remove("hide");
 }
 
-//form
-function formRead() {
-    var userName;
-
-    var userFormName = document.querySelector("#userForm");
-
-    userFormName.addEventListener("submit", function (eventObject) {
-        eventObject.preventDefault();
-
-        userName = document.getElementById("name-input");
-
-    })
-
-    return userName;
+function showDeleteButton() {
+    deleteScores.classList.remove("hide");
 }
 
+function showCorrect() {
+    correctOutput.classList.remove("hide");
+}
+
+
+
+//ending sequence event listener
+
+userFormName.addEventListener("submit", function (eventObject) {
+    eventObject.preventDefault();
+
+    userName = document.getElementById("name-input").value;
+    console.log(eventObject.target);
+
+
+    finalInfo = highScoreInfo(score, timer, userName);
+
+    //local storage
+
+    addItemToLocalStorage("highscores", finalInfo);
+    showHighScore();
+    hideUserDisplayInfo();
+    hideUserForm();
+    showQuizGen();
+    showDeleteButton();
+})
+
+
+//delete high scores event listener
+
+deleteScores.addEventListener("click", function () {
+
+    deleteLocalStorage("highscores");
+    pageInitialize();
+})
+
+//local storage
 function getFromLocalStorage(itemKey) {
     return JSON.parse(localStorage.getItem(itemKey)) || [];
 }
@@ -454,16 +478,30 @@ function addItemToLocalStorage(itemKey, item) {
 }
 
 function deleteLocalStorage(itemKey) {
+    localStorage.clear();
+}
+
+//function for making timer
+
+
+function showAnswer() {
+
+    correctShow = setInterval(function () {
+        //display timer in page
+        showCorrect();
+        if (timer2 <= 0) //state where timer is at 0 or less than it
+        {
+            hideCorrect();
+            timer2 = 3;
+            clearInterval(correctShow);
+        }
+        else {
+            timer2--;
+        }
+    }, 1000);
 
 }
 
-//display starting page
-
-//display quiz loop
-
-//display end
-
-//function for making timer
 
 function quizTimer() {
     //starts timer
@@ -475,8 +513,9 @@ function quizTimer() {
             scoreSection.innerText = "Score: " + score;
             timerSection.innerText = "Time Left: " + timer;
             console.log("Ran out of time.");
+
             endQuiz(); //ends the quiz
-            clearInterval(quizTime);
+
         }
         else {
             scoreSection.innerText = "Score: " + score;
@@ -488,11 +527,13 @@ function quizTimer() {
 
 
 //initialize the page
+function pageInitialize() {
+    hideQuestions();
+    hideUserForm();
+    hideUserDisplayInfo();
+    hideHighScore();
+    showQuestionTitle();
+    console.log("Loaded Page");
+}
 
-hideQuestions();
-hideUserForm();
-hideUserDisplayInfo();
-hideHighScore();
-
-showQuestionTitle();
-console.log ("Loaded Page");
+pageInitialize();

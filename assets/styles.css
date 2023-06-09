@@ -1,29 +1,156 @@
+:root{
+    --shade-1: #92afd7;
+    --shade-2: #c5d1eb;
+    --shade-3: #5a7684;
+    --shade-4: #395B50;
+    --shade-5: #1F2F16;
+
+}
 
 
+*
+{
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    background-color: var(--shade-1);
+}
+header
+{
+    background-color: var(--shade-2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    margin-bottom: 25px;
+}
+
+#displayInfo
+{
+    display: flex;
+    font-size: 20px;
+}
+
+#score{
+    margin-right: 10px;
+}
 
 .displayArea
 {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }
 
 .hide
 {
-    display: none;
+    display: none !important;
 }
 
-
-#answers
-{
-    display: flex;
-    flex-direction: column;
-}
-#questionTitle
-{
-    color: white;
-    background-color: black;
+.displayArea{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+#questionsAndAnswers {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+.answers button{
+margin: 8px;
+padding: 5px;
+width: 50%;
+background-color: var(--shade-3);
+border-color: var(--shade-5);
+color: white;
+}
+
+
+#questionTitle
+{
+    color: white;
+    background-color: var(--shade-4);
+    width: 50%;
+    padding: 10px;
+    border-color: var(--shade-5);
+}
+
+#quizButton
+{
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#quizButton:hover {
+    background-color: #45a049;
+  }
+
+  #quizButton:active {
+    background-color: #3e8e41;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+#deleteHighScores
+{
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ED0800;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#deleteHighScores:active
+{
+    background-color: #8B0000    ;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+#highScore
+{
+    margin: 10px;
+    padding: 10px 5%;
+    background-color: var(--shade-2);
+    border-color: var(--shade-5);
+}
+
+#userForm label
+{
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+hr{
+    width:50%;
+}
+
+#correctSection
+{
+    margin: 0;
+    font-style: italic;
+    font-size: 24px;
+    color: white;
 }

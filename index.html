@@ -15,8 +15,8 @@
 
         <h2 class="pageTitle">JS, CSS, HTML Coding Quiz | By Francis Reyes</h2>
         <section id="displayInfo">
-            <h3 id="score">Correct: </h3>
-            <h3 id="timer">Timer: </h3>
+            <h3 id="score">Score: 0</h3>
+            <h3 id="timer">Time Left: 60</h3>
         </section>
     </header>
 
@@ -28,7 +28,7 @@
             </h2>
 
             <section class="answers">
-                <button id="answer1" data-choice-number="1" data-paul-was-here="true">
+                <button id="answer1" data-choice-number="1">
                     answer 1
                 </button>
 
@@ -36,23 +36,27 @@
                     answer 2
                 </button>
 
-                <button id="answer3">
+                <button id="answer3" data-choice-number="3">
                     answer 3
                 </button>
 
-                <button id="answer4">
+                <button id="answer4" data-choice-number="4">
                     answer 4
                 </button>
 
             </section>
-
+        <hr>
+        <p id="correctSection">
+            Correct!
+        </p>
 
         </section>
 
         <form id="userForm">
+            <h3>The Quiz has finished!</h3>
             <label for="name-input">Enter Your Name: </label>
 
-            <input id="name-input" type="text" placeholder="Enter Your Name">
+            <input id="name-input" type="text" placeholder="John Doe">
             <input type="submit" value="Submit">
         </form>
         <h3 id="highScore">
@@ -61,6 +65,10 @@
 
         <button id="quizButton">
             Generate Quiz
+        </button>
+
+        <button id="deleteHighScores">
+            Delete High Scores from Local Storage
         </button>
     </main>
 
